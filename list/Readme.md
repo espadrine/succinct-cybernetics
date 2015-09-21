@@ -4,7 +4,7 @@ Sorted lists are easier to search through / extract data, but maintaining that
 property requires either care or full-list sorting (as below).
 
 |           | Average       | Worst         | Stable | Memory          |
-|===========|===============|===============|========|=================|
+|-----------|---------------|---------------|--------|-----------------|
 |Quicksort  | O(n log n)    | O(n^2)        | no     | O(log n) / O(n) |
 |Merge sort | O(n log n)    | O(n log n)    | yes    | O(n)            |
 |" in-place | O(n log(n)^2) | O(n log(n)^2) | yes    | O(1)            |

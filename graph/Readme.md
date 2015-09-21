@@ -11,7 +11,7 @@ another, sometimes with a value).
   or with a fixed maximum of adjacent vertices.
 
 |             | Adjacency matrix | Adjacency list |
-|=============|==================|================|
+|-------------|------------------|----------------|
 | Storage     | O(v^2)           | O(v + e)       |
 | Add vertex  | O(v^2)           | O(1)           |
 | Add edge    | O(1)             | O(1)           |
