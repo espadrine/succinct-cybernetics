@@ -16,6 +16,8 @@ An algorithm has complexity `T(n) = a T(n/b) + f(n)`.
 
 # Typical complexities
 
+| Complexity | Description |
+|------------|-------------|
 | O(1)       | Getting an element from an array |
 | O(m α(m,n))| Best minimum spanning tree (α = inverse Ackermann) |
 | O(log n)   | Binary search |
