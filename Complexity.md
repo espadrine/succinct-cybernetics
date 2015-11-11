@@ -10,9 +10,9 @@ f(n) = Θ(g(n))  ⇔  g(n)·k1 ≤ f(n) ≤ g(n)·k2    "bounded by"
 
 An algorithm has complexity `T(n) = a T(n/b) + f(n)`.
 
-1. if `f(n) = Θ(n^(<logb(a)))`: `T(n) = Θ(n^(logb(a)))`
-2. if `f(n) = Θ(n^(logb(a)) log(n)^k)`: `T(n) = Θ(n^(logb(a)) log(n)^(k+1))`
-3. if `f(n) = Θ(n^(>logb(a)))`: `T(n) = Θ(f(n))`
+1. `f(n) = Θ(n^(<logb(a)))` → `T(n) = Θ(n^(logb(a)))`
+2. `f(n) = Θ(n^(logb(a)) log(n)^k)` → `T(n) = Θ(n^(logb(a)) log(n)^(k+1))`
+3. `f(n) = Θ(n^(>logb(a)))` → `T(n) = Θ(f(n))`
 
 # Typical complexities
 
