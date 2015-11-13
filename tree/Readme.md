@@ -1,9 +1,9 @@
 Trees are connected graphs without cycles.
 
-Most trees we use are rooted: one vertex is the entry point (the root);
+Most trees we use are **rooted**: one vertex is the entry point (the root);
 it is the only vertex with no edge pointing to it, all other have exactly one.
 
-Many trees are ordered: vertices order their children like a list.
+Many trees are **ordered**: vertices order their children like a list.
 
 The most common implementation of trees is as either null pointers or pointers
 to a structure with a value and a list of children trees.
@@ -67,7 +67,7 @@ Rarer, it ensures that recently requested searches are faster to search for.
 Great for priority queues. Efficient to implement as an array.
 
 - Complete binary tree: all levels of the tree must be filled but the bottom.
-- Each value stored in a vertex is bigger or equal to its children.
+- Each value stored in a vertex is bigger than or equal to its children.
 
 # B-tree
 
