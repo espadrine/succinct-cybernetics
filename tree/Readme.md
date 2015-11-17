@@ -54,9 +54,13 @@ If the tree is balanced (= minimal height), we get O(log n) worst-case.
 The first self-balanced binary search tree, and the one with the least costly
 search. Use this if you only insert during initialization.
 
+Height ≤ `logφ(√5·(n+2))-2`.
+
 ### Red-Black tree
 
 Insertions are less costly than an AVL tree.
+
+Height ≤ `2·log2(n+1)`.
 
 ### Splay tree
 
@@ -68,6 +72,9 @@ Great for priority queues. Efficient to implement as an array.
 
 - Complete binary tree: all levels of the tree must be filled but the bottom.
 - Each value stored in a vertex is bigger than or equal to its children.
+
+A nice thing to know: it can sort an array in-place, just by inserting all the
+elements into the heap, and extracting the minimum n times.
 
 # B-tree
 
