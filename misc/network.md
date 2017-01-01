@@ -80,6 +80,47 @@ HTML file), and also have headers explaining what the data is, how it is encoded
 (charset, compression), what time it is, whether to use caching, how to store
 session information (through cookies) and so on.
 
+As mentioned, HTTP includes presentation-layer "protocols" in headers, such as
+**Multipurpose Internet Mail Extensions** ([MIME][]) in `Content-Type`, to
+specify the file `<type>/<subtype>` (eg. `text/plain`), or whether it
+recursively contains subfiles with `multipart/mixed` or
+[`multipart/form-data`][form-data], with each subfile specifying their own
+headers:
+
+    POST /upload HTTP/1.1
+    Host: localhost:1234
+    Content-Length: 882
+    Content-Type: multipart/form-data; boundary=random0ACxeUx4Nxqy3roVtMxrAw
+
+    --random0ACxeUx4Nxqy3roVtMxrAw
+    Content-Disposition: form-data; name="name-of-first-part"
+    Content-Type: text/plain
+
+    This first file contains normal plain text.
+    --random0ACxeUx4Nxqy3roVtMxrAw
+    Content-Disposition: form-data; name="multiple-images"; filename="image.svg"
+    Content-Type: image/svg+xml; charset=UTF-8
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="20">
+      <text x="10" y="15">This is an image</text>
+    </svg>
+    --random0ACxeUx4Nxqy3roVtMxrAw
+    Content-Disposition: form-data; name="multiple-images"; filename="image.png"
+    Content-Type: image/png
+    Content-Transfer-Encoding: base64
+
+    iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAAXNSR0IArs4c6QAAAARnQU1BAACx
+    jwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAMSURBVBhXY2BgYAAAAAQAAVzN/2kAAAAASUVO
+    RK5CYII=
+    --random0ACxeUx4Nxqy3roVtMxrAw--
+
+(Note that our use of base64 in image.png is deprecated; in real life, it would
+be replaced by the binary data directly.)
+
+[MIME]: https://tools.ietf.org/html/rfc2045
+[form-data]: https://tools.ietf.org/html/rfc7578
+
 HTTPS is similar to HTTP, except that the whole data stream, including headers,
 is encrypted to prevent intermediate nodes on the network from reading or
 modifying the content, which is necessary when transmitting identification
