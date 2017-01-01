@@ -96,8 +96,9 @@ When using IP, it cuts its segments into pieces that fit in a packet.
 2. The client starts to connect with a SYN.
 3. The server informs the client that it received it with a SYN+ACK.
 4. The client sends an ACK.
-5. The server sends a series of packets to the client, which ACKs them if all
-   previous packets have been received in order.
+5. The server and the client can now send (PSH) a series of packets to each
+   other full-duplex, and they ACK each reception if all previously received
+   packets have been received in order.
 6. The client sends a FIN.
 7. The server sends a FIN+ACK.
 8. The client sends an ACK.
@@ -118,14 +119,14 @@ A TCP header includes:
 - data offset in 4 bits, the size of the TCP header in 32-bit words (defaults to
   5),
 - 000 (reserved),
-- flags in 9 bits: NS, CWR (Congestion Window Reduced), ECE (ECN-Echo), URG
-  (urgent), ACK, PSH (push buffered data), RST (reset connection), SYN
-  (synchronize sequence number, only set for the first packet of the segment),
-  FIN (end of data),
+- flags in 9 bits: NS, CWR, ECE, URG (read urgent pointer), ACK (acknowledge
+  reception of data or SYN), PSH (push buffered data), RST (reset connection),
+  SYN (synchronize sequence number, only used in the initial handshake), FIN
+  (end of data, only used in the final handshake),
 - window size in 2 bytes, allowing flow and congestion control,
 - checksum in 2 bytes to check header and data corruption,
-- urgent pointer in 2 bytes pointing to a sequence number,,
-- options (if the data offset is > 5, zero-padded) eg. maximum segment size,
+- urgent pointer in 2 bytes pointing to a sequence number,
+- options (if the data offset is > 5, zero-padded) eg. maximum segment size, or
   window scale,
 - payload.
 
