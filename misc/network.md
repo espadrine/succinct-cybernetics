@@ -61,11 +61,13 @@ newlines). The server may respond:
 
     0
 
-This response includes an HTML file that the HTTP client (usually, a browser,
+This response includes an [HTML][] file that the HTTP client (usually, a browser,
 like Firefox or Google Chrome) will read as instructions on how to lay out a
 page, which determines the pixels to display, the animations to show, the
 interactions to execute when the user moves or clicks the mouse, the sounds to
 play, etc.
+
+[HTML]: https://html.spec.whatwg.org/multipage/
 
 All requests have a first line with a method (`GET`), a path (`/`), and a
 protocol (`HTTP/1.1`), followed by headers mapping header names (`Accept`) to
