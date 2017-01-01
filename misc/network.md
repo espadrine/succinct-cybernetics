@@ -239,10 +239,11 @@ special ranges of addresses:
   they are typically behind a Network Address Translator (NAT)),
 - 172.16.0.0/12 for medium private networks,
 - 192.168.0.0/16 for small private networks,
-- 0.0.0.0/8 for the current network,
-- 100.64.0.0/10 for machines doing Internet Service Provider interconnection,
+- 0.0.0.0/8 for this network, used as source address when getting an IP address,
+- 100.64.0.0/10 "shared address space", similar to private networks, but for
+  Carrier-Grade NAT (CGN),
 - 127.0.0.0/8 for loopback (sending network data within a single node), most
-  notably 127.0.0.1 refers to localhost,
+  notably 127.0.0.1 (which the localhost hostname usually resolves to),
 - 169.254.0.0/16 for IP assignment between link-local nodes to bootstrap DHCP,
 - 192.0.0.0/24 for IANA,
 - 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24 are reserved for testing and
@@ -258,7 +259,7 @@ colon-separated hexadecimal numbers, with zeros optionally replaced once by a
 double colon. They can be:
 
 - unicast has a ≥ 48-bit routing prefix, a ≤ 16-bit subnet id defined by the
-  network administrator, and a 64-bit interface identifier defined either by
+  network administrator, and a 64-bit interface identifier obtained either by
   DHCPv6, the MAC address, random, or manually.
 - :: for unspecified address.
 - ::1 for localhost,
@@ -291,9 +292,9 @@ double colon. They can be:
 - 0100::/64 to discard traffic.
 
 Some IP addresses can be mapped to a name (eg, `en.wikipedia.org` →
-91.198.174.192) by using the **Domain Name System** (DNS), which synchronizes
-and resolves domain names. Companies that can allocate a new domain name are
-called **registrars**. They publish their information as zone files, and allow
+91.198.174.192) by using the **Domain Name System** (DNS), a naming system for
+Internet entities. Companies that can allocate a new domain name are called
+**registrars**. They publish their information as zone files, and allow
 authenticated editing of those files by the domain name owners as part of a
 business arrangement.
 
@@ -342,8 +343,8 @@ includes:
   IPv6); if the value is < 1536, it represents the payload size in bytes,
 - payload: up to 1500 bytes of data from the layer above, typically IP,
 - Frame Check Sequence (FCS, implemented using a **Cyclic-Redundancy Check**
-  (CRC)): 4 bytes that verify that the frame is not corrupted; if it is, it must
-  be ignored and re-sent.
+  (CRC)): 4 bytes that verify that the frame is not corrupted; if it is, it is
+  dropped and upper layers may have to re-send it.
 - Interpacket gap: not really part of the frame, those 12 bytes of idle line
   transmission are padding to avoid having frames right next to each other.
 
