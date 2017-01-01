@@ -32,7 +32,7 @@ Let's focus on a typical stack.
 
 **HyperText Transfer Protocol** ([HTTP][]) is an application-layer protocol designed
 for client-server document transmission. For instance, to request the main page
-of Google:
+of an HTTP server on your computer:
 
     GET / HTTP/1.1
     Host: localhost:1234
