@@ -18,8 +18,9 @@ layers:
 - Data link: transmission of frames between adjacent nodes, to determine the
   start and end of messages (eg: MAC, PPP),
 - Network: transmission of packets for routing across the graph (eg: IP),
-- Transport: transmission of segments, so both endpoints can synchronize the
-  receipt of the message (eg: TCP, UDP, ICMP (ping)),
+- Transport: transmission of segments, so applications on both endpoints can
+  exchange messages with given reliability guarantees (eg: TCP, UDP, ICMP
+  (ping)),
 - Session: recognition of endpoints across messages,
 - Presentation: encoding of data (charset, compression, encryption) (eg: TLS,
   MIME, to a limited extent),
