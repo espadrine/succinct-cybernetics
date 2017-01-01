@@ -321,17 +321,26 @@ wireless protocol.
 protocol. It defines using RJ45, which uses an 8P8C (8 position 8 contact)
 connector with TIA/EIA-568B, ie. having eight copper wires with pin 1 through 8:
 white-orange, orange, white-green, blue, white-blue, green, white-brown, brown.
-x / white-x wires form pairs 1 through 4: blue, orange, green, brown. Orange
-pins 1 (TX+) and 2 (TX-) transmit bits; green pins 3 (RX+) and 6 (RX-) receive
-bits, which makes this full-duplex.
+x / white-x wires form pairs 1 through 4: blue, orange, green, brown, each
+twisted together at different rates in the cable. Orange pins 1 (TX+) and 2
+(TX-) transmit bits; green pins 3 (RX+) and 6 (RX-) receive bits, which makes
+this full-duplex.
+
+From left to right on the female Ethernet connector:
+
+    pin   1         2         3       4       5        6        7        8
+    ┌────────────┬──────┬───────────┬────┬──────────┬─────┬───────────┬─────┐
+    │white-orange│orange│white-green│blue│white-blue│green│white-brown│brown│
+    └────────────┴──────┴───────────┴────┴──────────┴─────┴───────────┴─────┘
+          TX+       TX-      RX+                      RX-
 
 Bits are first encoded with 4B5B: each 4 bits are encoded as 5 bits according to
 a predetermined mapping that prevents having too many consecutive zeros, which
-would make locating individual bits harder, as noise blurs them. 4B5B also has
-five extra 5-bit codes: one to indicate that no data is sent (Idle = 11111,
-which in NRZI means systematically alternating the current), two to indicate
-that we will start sending data (Start of Stream Data = SSD), two to indicate
-that we stop sending data (End of Stream Data = ESD).
+would make locating individual bits harder, as clocks are not perfectly
+synchronized. 4B5B also has five extra 5-bit codes: one to indicate that no data
+is sent (Idle = 11111, which in NRZI means systematically alternating the
+current), two to indicate that we will start sending data (Start of Stream Data
+= SSD), two to indicate that we stop sending data (End of Stream Data = ESD).
 
     Bits: 0100 0111  (ASCII G)
     4B5B: 0101001111
