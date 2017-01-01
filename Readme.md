@@ -1,7 +1,7 @@
 # Solve Data In Code
 
-All known problems can be solved with algorithms. For all we know, humans are
-Turing machines.
+All decidable problems can be solved with algorithms. For all we know, humans
+are Turing machines.
 
 Most problems can be structured into a **graph**. Graphs have vertices (entities
 holding data) and edges (from one vertex to another, sometimes with a value).
