@@ -15,20 +15,21 @@ Standards can depend on the existence of a lower-level standard, forming a
 *protocol stack*. The **OSI model** is a theoretical stack with the following
 layers:
 
-- Physical: transmission of bits through a medium (eg: 100BASE-TX Fast Ethernet),
+- Physical: transmission of bits through a medium (eg: Ethernet PHY chip for
+  100BASE-TX),
 - Data link: transmission of frames mostly between adjacent nodes, to determine
   the start and end of messages (eg: MAC, PPP),
 - Network: transmission of packets for routing across the graph (eg: IP),
 - Transport: transmission of segments, so applications on both endpoints can
   exchange messages with given reliability guarantees (eg: TCP, UDP, ICMP
   (ping)),
-- Session: recognition of endpoints across messages,
+- Session: setup and recognition of endpoints across messages,
 - Presentation: encoding of data (charset, compression, encryption) (eg: TLS,
   HTTP with MIME to some extent),
 - Application: serialization of data structures (eg: HTTP (documents), NTP
   (time), SMTP (email), FTP (file)).
 
-Let's focus on a typical stack.
+Let's focus on a typical stack which roughly fits OSI.
 
 ### HTTP
 
@@ -144,7 +145,7 @@ When using IP, it cuts its segments into pieces that fit in a packet.
    have been received in order.
 6. The client sends a FIN.
 7. The server sends a FIN+ACK (or an ACK followed by a FIN).
-8. The client sends an ACK.
+8. The client sends an ACK. (The connection stays open until it times out.)
 
 A TCP header includes:
 
@@ -319,8 +320,8 @@ interchangeable.*
 
 ### Ethernet
 
-At the link layer, communication only happens directly between two machines;
-there are no intermediate nodes in the graph.
+At the link layer, communication mostly happens directly between two adjacent
+nodes.
 
 Among link-layer protocols, **Ethernet** (aka. LAN, IEEE 802.3) is a link-layer
 protocol for transiting frames through a wire between two machines. A frame
