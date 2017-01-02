@@ -3,8 +3,9 @@
 Computers [communicate](./information.md) to reach a goal. For instance, you
 contact Youtube to see cat videos, Youtube responds to gain advertising revenue.
 
-A **network** is a graph where vertices are processing machines and edges are
-transmission links. Examples include the Internet, telephones, walkie-talkies.
+A **network** can be represented with a graph where vertices are processing 
+machines and edges are transmission links. Examples of networks include the 
+Internet, telephones, and walkie-talkies.
 
 ## Protocols
 
