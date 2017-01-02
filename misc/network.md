@@ -197,7 +197,7 @@ IPv4 headers have the following fields:
 - 0 in 1 bit,
 - Don't Fragment (DF) in 1 bit, if the packet can be fragmented,
 - Multiple Fragments (Mf) in 1 bit, if the rest of the packet is in subsequent
-  framgents,
+  fragments,
 - fragment offset in 13 bits, identifying the position of the fragment in the
   packet,
 - Time To Live (TTL) in 1 byte: the number of remaining nodes in the network
