@@ -244,7 +244,7 @@ special ranges of addresses:
   Carrier-Grade NAT (CGN),
 - 127.0.0.0/8 for loopback (sending network data within a single node), most
   notably 127.0.0.1 (which the localhost hostname usually resolves to),
-- 169.254.0.0/16 for IP assignment between link-local nodes to bootstrap DHCP,
+- 169.254.0.0/16 for IP assignment between link-local when DHCP can't be used,
 - 192.0.0.0/24 for IANA,
 - 192.0.2.0/24, 198.51.100.0/24, 203.0.113.0/24 are reserved for testing and
   examples in documentation,
