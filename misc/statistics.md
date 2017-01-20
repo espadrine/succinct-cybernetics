@@ -2,8 +2,9 @@
 
 ## Probabilities
 
-- Ω = all possibilities
-- A∈F⊂Ω ⇒ 0 ≤ prob(A) ≤ 1
+- Ω: set of elementary events (exclusive outcomes)
+- F: set of events; σ-algebra (closed set of all subsets) of Ω
+- prob: function from F to [0,1]
 - prob(Ω) = 1
 - prob(∅) = 0
 - prob(Ω\A) = 1 - prob(A)
@@ -26,9 +27,9 @@
 
 A **random variable** (RV) is a function from Ω to ℝ.
 
-I(E) = 1 if E, otherwise 0.
+The **indicator function** is a RV such that I(E) = 1 if E, otherwise 0.
 
-A **mass function** for an RV X is fX: x → prob(X=x).
+A **mass function** for a RV X is fX: x → prob(X=x).
 
 - fX(x) ≥ 0
 - Σ{x∈Dx} fX(xi) = 1
@@ -37,7 +38,7 @@ The **expected value** E[X] = Σ x fX(x).
 
 - E[g(X)] = Σ{x∈X} g(x) fX(x)
 - E[aX+b] = a E[X] + b
-- (E[X])^2 ≤ E[X^2]  (*Cauchy-Schwarz inequality*)
+- (E[X])^2 ≤ E[X^2]  \(*Cauchy-Schwarz inequality*)
 - prob(X=a) = 1 ⇒ E[X] = a
 - prob(a < X ≤ b) = 1 ⇒ a < E[X] ≤ b
 - if X∈ℕ, r≥2, E[X] < ∞:
@@ -71,7 +72,7 @@ A few families of distribution.
   *Number of throws before a 1/p dice yields a 1.*
   - E[X] = 1/p
   - var(X) = (1-p)/p^2
-  - prob(X > n+m|X > m) = prob(X > n)  (*memory loss*)
+  - prob(X > n+m | X > m) = prob(X > n)  (*memory loss*)
 - Negative binomial "X ~ NegBin(n,p)": RV such that fX(x) = (x-1 choose n-1) p^n (1-p)^(x-n).  
   *Number of throws before a 1/p dice yields n 1s.*
   - E[X] = n p / (1-p)
@@ -88,7 +89,7 @@ A few families of distribution.
 - Uniform: RV such that fX(x) = constant with x∈[a,b].  
   *Result of dice throw.*
   - E[X] = (a+b)/2
-  - var(X) = (b-a)^2/12, or ((b-a+1)^2-1)/12 if discrete
+  - var(X) = (b-a)^2/12, or ((b-a+1)^2-1)/12 if discrete  
 - Normal (Gaussian) "X ~ N(μ,σ^2)": RV such that fX(x) = exp(-(x-μ)^2/(2σ^2)) / (σ sqrt(2π))
   *Infinite random walk starting at μ with step variance σ^2.*
   - E[X] = μ
