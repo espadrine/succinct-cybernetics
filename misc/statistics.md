@@ -8,11 +8,11 @@
 - prob(Ω) = 1
 - prob(∅) = 0
 - prob(Ω\A) = 1 - prob(A)
-- prob(A∪B) = prob(A) + prob(B) - prob(A∩B)  (*think overlapping disks*)
-- A, B disjoint ⇔ prob(A∩B) = 0  (*non-overlapping disks*)
+- prob(A∪B) = prob(A) + prob(B) - prob(A∩B)  *(think overlapping disks)*
+- A, B disjoint ⇔ prob(A∩B) = 0  *(non-overlapping disks)*
 - prob(∪Ai) = Σ{r=1…n} (-1)^(r+1) Σ{i1≤ir} prob(Ai1∩…∩Air)
 - prob(∪Ai) ≤ Σ prob(Ai)
-- Ai pairwise disjoint ⇒ prob(∪Ai) = Σ prob(Ai)  (*partition of a disk*)
+- Ai pairwise disjoint ⇒ prob(∪Ai) = Σ prob(Ai)  *(partition of a disk)*
 - prob(∩Ai) = Π prob(Ai)
 - prob(∩Ai) = Π{i=2…} prob(Ai|A1∩…∩A{i-1}) prob(A1)
 - A1⊂A2⊂… ⇒ prob(An) → prob(∪Ai)
@@ -20,25 +20,25 @@
 - prob(A|B) = prob(A∩B) / prob(B)
 - A, B independent ⇔ prob(A|B) = prob(A)
 - A∈∪Bi ⇒ prob(A) = Σ prob(A∩Bi)
-- prob(A|B) = prob(B|A) prob(A) / prob(B)  (*Bayes' theorem*)
+- prob(A|B) = prob(B|A) prob(A) / prob(B)  *(Bayes' theorem)*
 - Ai partition of Ω ⇒ prob(Ai|B) = prob(B|Ai) prob(Ai) / (Σj prob(B|Aj) prob(Aj))
 
 ## Distributions
 
-A **random variable** (RV) is a function from Ω to ℝ.
+A **random variable** (RV) is a function from Ω to ℝ. *(eg. winnings)*
 
-The **indicator function** is a RV such that I(E) = 1 if E, otherwise 0.
+The **indicator function** is a RV such that I(A) = 1 if A, otherwise 0.
 
 A **mass function** for a RV X is fX: x → prob(X=x).
 
 - fX(x) ≥ 0
-- Σ{x∈Dx} fX(xi) = 1
+- ∫ℝ fX(x) dx = 1
 
 The **expected value** E[X] = Σ x fX(x).
 
 - E[g(X)] = Σ{x∈X} g(x) fX(x)
 - E[aX+b] = a E[X] + b
-- (E[X])^2 ≤ E[X^2]  \(*Cauchy-Schwarz inequality*)
+- (E[X])^2 ≤ E[X^2]  *(Cauchy-Schwarz inequality)*
 - prob(X=a) = 1 ⇒ E[X] = a
 - prob(a < X ≤ b) = 1 ⇒ a < E[X] ≤ b
 - if X∈ℕ, r≥2, E[X] < ∞:
@@ -61,7 +61,7 @@ The **covariance** cov(X,Y) = E[XY] E[X] E[Y]
 A few families of distribution.
 
 - Bernouilli: RV from Ω to {0,1}. Take p = prob(X=0).  
-  *Number of 1s from a single 1/p dice throw.*
+  *Number of 1s from a 1/p dice throw (a dice with 1/p faces).*
   - E[X] = p
   - var(X) = p (1-p)
 - Binomial "X ~ B(n,p)": RV such that fX(x) = (n choose x) p^x (1-p)^(n-x).  
@@ -72,7 +72,7 @@ A few families of distribution.
   *Number of throws before a 1/p dice yields a 1.*
   - E[X] = 1/p
   - var(X) = (1-p)/p^2
-  - prob(X > n+m | X > m) = prob(X > n)  (*memory loss*)
+  - prob(X > n+m | X > m) = prob(X > n)  *(memory loss)*
 - Negative binomial "X ~ NegBin(n,p)": RV such that fX(x) = (x-1 choose n-1) p^n (1-p)^(x-n).  
   *Number of throws before a 1/p dice yields n 1s.*
   - E[X] = n p / (1-p)
@@ -89,8 +89,8 @@ A few families of distribution.
 - Uniform: RV such that fX(x) = constant with x∈[a,b].  
   *Result of dice throw.*
   - E[X] = (a+b)/2
-  - var(X) = (b-a)^2/12, or ((b-a+1)^2-1)/12 if discrete  
-- Normal (Gaussian) "X ~ N(μ,σ^2)": RV such that fX(x) = exp(-(x-μ)^2/(2σ^2)) / (σ sqrt(2π))
+  - var(X) = (b-a)^2/12, or ((b-a+1)^2-1)/12 if discrete
+- Normal (Gaussian) "X ~ N(μ,σ^2)": RV such that fX(x) = exp(-(x-μ)^2/(2σ^2)) / (σ sqrt(2π))  
   *Infinite random walk starting at μ with step variance σ^2.*
   - E[X] = μ
   - var(X) = σ^2
