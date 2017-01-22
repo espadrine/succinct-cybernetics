@@ -1,4 +1,4 @@
-# Solve Data In Code
+# Succinct Cybernetics
 
 All decidable problems can be solved with algorithms. For all we know, humans
 are Turing machines.
