@@ -123,3 +123,7 @@ Allow failure (chaos monkey), backup, redundancy, failover, monitoring, logging
 Protocols: version, upgrade
 
 SLA
+
+## Going further
+
+- [Distributed systems for fun and profit](http://book.mixu.net/distsys/index.html)

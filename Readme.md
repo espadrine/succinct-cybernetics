@@ -30,8 +30,14 @@ Another structure is a **set**. Sets are graphs with no edges.
 3. [Trees](/tree/Readme.md)
 4. [Lists](/list/Readme.md)
 5. Misc:
-    - [Time](/misc/time.md)
-    - [Statistics](/misc/statistics.md)
-    - [Network](/misc/network.md)
     - [Memory](/misc/memory.md)
-    - [Distributed Systems](/misc/distributed-systems.md)
+    - [Time](/misc/time.md)
+    - [Network](/misc/network.md)
+    - [Synchronization](/misc/synchronization.md)
+    - [Reliability](/misc/reliability.md)
+    - [Statistics](/misc/statistics.md)
+    - [Cryptography](/misc/cryptography.md)
+
+## Going further
+
+- [Introduction to Algorithms](https://mitpress.mit.edu/books/introduction-algorithms)
