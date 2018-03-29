@@ -25,9 +25,11 @@ The main location of volatile storage; 100 ns latency, 20 GB/s. When a process i
 - The **data** contains statically allocated data (ie. created when the program starts, destroyed when it ends): global variables, string constants… The ones that are not initialized at startup are in **BSS** (Block Started by Symbol).
 - The **text** stores the code as executable machine instructions.
 
-    ┌──────┬──────┬─────┬──────────────────────┬─────────┬──────────────────────┐
-    │ text │ data │ bss │ heap (grows right) → │ (empty) │ ← stack (grows left) │
-    └──────┴──────┴─────┴──────────────────────┴─────────┴──────────────────────┘
+```
+ ┌──────┬──────┬─────┬──────────────────────┬─────────┬──────────────────────┐
+ │ text │ data │ bss │ heap (grows right) → │ (empty) │ ← stack (grows left) │
+ └──────┴──────┴─────┴──────────────────────┴─────────┴──────────────────────┘
+```
 
 Each program has its own read, write, and execute access to parts of memory, enforced by the operating system, which can terminate the program with a **segmentation fault** if it does an unauthorized operation.
 
