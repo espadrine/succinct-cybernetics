@@ -52,5 +52,12 @@ An algorithm has complexity `T(n) = a T(n/b) + f(n)`.
 - NP-hard: if that problem was O(1), all problems in NP would be in P.
 - NP-complete: NP-hard and NP.
 
+```
+← easy … hard →
+├────────NP─────────┤
+├─P─┤ ├─NP-complete─┤
+      ├────NP-hard────┤
+```
+
 P could be equal to NP, but for all practical purposes, it is not (which may be
 proved in the future).
