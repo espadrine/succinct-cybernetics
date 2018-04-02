@@ -14,6 +14,8 @@ output which changes the estimated probability, or machines can become more
 powerful than planned. As a result, it is necessary to stay up-to-date to
 correctly estimate risk.
 
+### Hash
+
 A **Hash** is a one-way function returning a fixed-sized (typically small)
 output such that the following functions are computationally too hard:
 - `collision() = (m1, m2)` such that `hash(m1) = hash(m2)`
@@ -32,8 +34,28 @@ properties that require the use of the HMAC algorithm for message authentication
 (but SHA512-256 (ie. SHA512 truncated to 256 bits) does not), and SHA3 is the
 latest as of 2018 (and does not have the SHA2 issues).
 
-Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12; SipHash
-is a bit weaker (64-bit output) but faster, typically used for hash tables.
+Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12.
+
+### Message Authentication Code
+
+A **Message Authentication Code** (MAC) can assert the following properties if
+you share a secret with a given entity:
+- **authentication**: the message was validated by a given entity,
+- **integrity**: the message was not modified by a different entity.
+
+It can be done with a hash; it is then called **keyed hash function**.
+Modern hash functions such as SHA3 or BLAKE2 offer this functionality this way:
+- `mac = authentify(message, key) = hash(key + message)` (`+` is string
+  concatenation),
+- `verify(message, mac, key) = authentify(message, key) == mac`.
+
+Older hashes suffer from *length-extension attacks* with this approach. However,
+they can be used by relying on the **HMAC** algorithm:
+- `authentify(message, key) = hash((rehash(key)^outerPad) +
+  hash((rehash(key)^innerPad) + message))` where `^` is XOR, the pads are fixed
+  and the size of the hash block, and `rehash` depends on the hash size.
+
+### Key derivation function
 
 One use of cryptographic hash functions is to store password, but only via a
 metafunction called a **key derivation function** that performs **key
@@ -181,6 +203,8 @@ have **forward secrecy**.
 - **authentication**: the message was validated by a given entity,
 - **non-repudiation**: the message cannot be un-validated by that entity,
 - **integrity**: the message was not modified by a different entity.
+
+Unlike a MAC, it does not require a shared secret, just shared public keys.
 
 It relies on two functions, `sign()` and `verify()`, and a public/private key
 pair, such that:
