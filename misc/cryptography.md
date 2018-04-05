@@ -36,6 +36,11 @@ latest as of 2018 (and does not have the SHA2 issues).
 
 Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12.
 
+Famous non-cryptographic hash functions include Zobrist (eg. to detect unique
+states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
+
+**Universal hash functions** TODO
+
 ### Message Authentication Code
 
 A **Message Authentication Code** (MAC) can assert the following properties if
@@ -74,22 +79,21 @@ algorithm can be used when computers get better at brute-forcing passwords.
 passwords hashed through a cryptographic hash cannot be brute-forced. For
 instance, a 256-bit BLAKE2 of a 128-bit CSPRNG output has 256/2 = 128 bits of
 security. Brute-forcing it would require `2^127` attempts on average. Computers
-take at best 1 ns to perform an elementary operation, and `2^127` ns is about 4
-times the age of the known universe.)
-
-Famous non-cryptographic hash functions include Zobrist (eg. to detect unique
-states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
-
-**Universal hash functions** TODO
+take at best 1 ns to perform an elementary operation, and `2^127` ns is 4 times
+the age of the known universe. Parallelizing would cost 20 septillion € of
+machines to brute-force a typical hash in 100 years, if Earth had enough
+material to build the computers. It goes down to 1 million € with 64 bits of
+security, which is why 128 bits are used when security matters, eg. with
+UUIDv4.)
 
 ## Randomness
 
 Humans are terrible at estimating randomness, and machines (and cryptographers)
 are pretty good at exploiting weaknesses in randomness.
 
-A good random source obeys certain *statistical* characteristics that ensure
-that the probability of someone finding future output from past output is near
-zero. (See for instance the [NIST randomness recommandation][].)
+A good random source obeys certain *statistical* characteristics to ensure that
+the probability of someone predicting its output is near zero.
+(See for instance the [NIST randomness recommandation][].)
 
 [NIST randomness recommandation]: https://csrc.nist.gov/projects/random-bit-generation
 
@@ -164,7 +168,7 @@ enforce the one-way constraint:
 
 ### Key exchange
 
-Encryption gets very computationally expensive for large (> 128 bits) messages.
+Encryption gets very computationally expensive for large (> 128 bit) messages.
 Since the goal of asymmetric encryption is to allow secure communication over a
 public channel without needing a shared secret (the issue with symmetric
 ciphers), this is limiting.
