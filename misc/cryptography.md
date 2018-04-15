@@ -29,10 +29,11 @@ fast.
 A regular NIST competition is performed to select a good hash function: the
 Secure Hash Algorithm (SHA).
 
-SHA0 and SHA1 are considered broken; some SHA2 constructions have dangerous
-properties that require the use of the HMAC algorithm for message authentication
-(but SHA512-256 (ie. SHA512 truncated to 256 bits) does not), and SHA3 is the
-latest as of 2018 (and does not have the SHA2 issues).
+SHA-0 and SHA-1 are considered broken; some SHA-2 constructions have dangerous
+properties (vulnerability to *length-extension attacks*) that require the use of
+the HMAC algorithm for message authentication (but SHA-512/256 (ie. SHA-512
+truncated to 256 bits) does not), and SHA-3 is the latest as of 2018 (and does
+not have the SHA-2 issues).
 
 Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12.
 
@@ -49,7 +50,7 @@ you share a secret with a given entity:
 - **integrity**: the message was not modified by a different entity.
 
 It can be done with a hash; it is then called **keyed hash function**.
-Modern hash functions such as SHA3 or BLAKE2 offer this functionality this way:
+Modern hash functions such as SHA-3 or BLAKE2 offer this functionality this way:
 - `mac = authentify(message, key) = hash(key + message)` (`+` is string
   concatenation),
 - `verify(message, mac, key) = authentify(message, key) == mac`.
