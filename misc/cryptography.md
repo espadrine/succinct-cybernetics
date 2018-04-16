@@ -61,6 +61,8 @@ they can be used by relying on the **HMAC** algorithm:
   hash((rehash(key)^innerPad) + message))` where `^` is XOR, the pads are fixed
   and the size of the hash block, and `rehash` depends on the hash size.
 
+Another common MAC is *Poly1305*.
+
 ### Key derivation function
 
 One use of cryptographic hash functions is to store password, but only via a
@@ -112,7 +114,8 @@ bits, as a number) every time it is called, such that:
 Cryptographically-Secure PRNG (CSPRNG) are designed more carefully but are
 typically slower.
 
-Examples: arc4random (based on a leaked version of the RC4 cipher), ChaCha20.
+Examples: arc4random (based on a leaked version of the RC4 cipher), ChaCha20
+(eg. in Linux’ /dev/urandom).
 
 Examples of non-cryptographically-secure: LCG, XorShift, Mersenne Twister, PCG
 (in order of quality against predictability).
@@ -139,7 +142,16 @@ bit of ciphertext out.
 
 One-time pad TODO
 
-RC4
+Ron Rivest designed the *RC4* (Rivest Cipher 4) as a proprietary algorithm for
+the RSA Security company. Following an anonymous online description, it was
+reverse-engineered. To avoid trademark conflicts, many systems adopted it as
+*ARC4*, and a derived CSPRNG was called *arc4random*. It was a common cipher in
+SSL/TLS and WEP/WPA, until a 2015 flaw was discovered.
+
+Daniel J. Bernstein (djb) designed *Salsa20* for the eSTREAM competition (a
+follow-up to the NESSIE competition where all stream ciphers submitted were
+broken). Many servers switched from RC4 to a derived cipher, *ChaCha20*, along
+with djb’s Poly1305 MAC, to have authenticated encryption (RFC 7905).
 
 ### Block ciphers
 
