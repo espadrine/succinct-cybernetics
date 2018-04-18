@@ -32,8 +32,8 @@ Secure Hash Algorithm (SHA).
 SHA-0 and SHA-1 are considered broken; some SHA-2 constructions have dangerous
 properties (vulnerability to *length-extension attacks*) that require the use of
 the HMAC algorithm for message authentication (but SHA-512/256 (ie. SHA-512
-truncated to 256 bits) does not), and SHA-3 is the latest as of 2018 (and does
-not have the SHA-2 issues).
+truncated to 256 bits) does not), and Joan Daemen’s SHA-3 is the latest as of
+2018 (and does not have the SHA-2 issues).
 
 Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12.
 
@@ -167,9 +167,34 @@ with djb’s Poly1305 MAC, to have authenticated encryption (RFC 7905).
 
 ### Block ciphers
 
-TODO
+A block cipher, by contrast with a stream cipher, can only encrypt a fixed
+number of bits (its *block size*).
 
-AES
+Most block ciphers are **product ciphers**: the generation of an encrypted block
+relies on repeating an operation (typically performing substitutions
+(**s-boxes**) and permutations (**p-boxes**)) multiple times by linking the
+output of one to the input of the next in a sophisticated *network* which
+increases security every time. (They achieve that by distributing the impact of
+each input bit to output bits, producing statistically more random output.)
+
+The number of times the network is repeated is called the number of **rounds**.
+Typical cryptanalysis first tries to break a cipher with a lower number of
+rounds. If they find a better algorithm than brute-force on all rounds, the
+cipher is considered *broken*, but the algorithm typically requires impractical
+amounts of time and memory. If it achieves a scale close to human lives and
+memory close to that of a country, it is considered *practically broken*.
+
+The US government’s NBS (ancestor to NIST) requested proposals for a cipher. IBM
+proposed **DES** (Data Encryption Standard), a 64-bit block cipher (based on a
+Feistel network), whose s-boxes were then tweaked by NSA and key size reduced to
+56 bits before publication.
+
+When DES’s key size became dangerously close to brute-force-worthy, 3DES was
+produced, but it was very slow. NIST organized a more open competition, **AES**
+(Advanced Encryption Standard). The finalist, Vincent Rijmen and Joan Daemen’s
+Rijndael, is a 128-bit block cipher based on a SP-network, with three variants:
+128-, 192-, 256-bit keys (with 10, 12, or 14 rounds). It was rebaptized AES when
+it won.
 
 ## Asymmetrical cryptography
 
