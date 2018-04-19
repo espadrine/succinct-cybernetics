@@ -196,6 +196,26 @@ Rijndael, is a 128-bit block cipher based on a SP-network, with three variants:
 128-, 192-, 256-bit keys (with 10, 12, or 14 rounds). It was rebaptized AES when
 it won.
 
+### Block modes
+
+Block modes convert a block cipher into a stream cipher by breaking the
+plaintext into blocks and encrypting each block with the cipher and a parameter
+that depends on the processing of previous blocks.
+
+The lack of use of that parameter, eg. by encrypting each block individually
+(*ECB* mode), falls to shifted plaintext analysis: identical plaintext blocks
+will have identical ciphertext blocks.
+
+**CBC** (Cipher Block Chaining) for instance XORs each block of plaintext with
+the ciphertext of the previous block. Diffie and Hellman also designed **CTR**
+(Counter) mode, which XORs the plaintext with an encrypted **nonce** (a unique
+input) that is incremented for every block.
+
+    Parameters: key, nonce, plaintext.
+    ciphertext block 1 = encrypt(nonce + 0, key) XOR (plaintext block 1)
+    ciphertext block 2 = encrypt(nonce + 1, key) XOR (plaintext block 2)
+    etc.
+
 ## Asymmetrical cryptography
 
 Cipher that defines three functions `public, private = keys(random)`,
