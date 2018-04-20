@@ -216,6 +216,14 @@ input) that is incremented for every block.
     ciphertext block 2 = encrypt(nonce + 1, key) XOR (plaintext block 2)
     etc.
 
+When the parameter for each block is obtained from the previous block, the first
+block needs an initial parameter. It must be unique (ie. a nonce, “number used
+once”), so that encrypting twice the same message does not yield the same
+ciphertext, which would leak information. Often, it needs to be random in a
+cryptographically-secure way. That first parameter is called an **initialization
+vector**. It must be sent along with the ciphertext to ensure it can be
+deciphered.
+
 ## Asymmetrical cryptography
 
 Cipher that defines three functions `public, private = keys(random)`,
