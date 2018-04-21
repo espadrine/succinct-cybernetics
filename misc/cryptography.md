@@ -46,8 +46,8 @@ states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
 
 A **Message Authentication Code** (MAC) can assert the following properties if
 you share a secret with a given entity:
-- **authentication**: the message was validated by a given entity,
-- **integrity**: the message was not modified by a different entity.
+- **authentication**: the message was validated by a keyholder,
+- **integrity**: the message was not modified by a non-keyholder.
 
 It can be done with a hash; it is then called **keyed hash function**.
 Modern hash functions such as SHA-3 or BLAKE2 offer this functionality this way:
@@ -221,8 +221,28 @@ block needs an initial parameter. It must be unique (ie. a nonce, “number used
 once”), so that encrypting twice the same message does not yield the same
 ciphertext, which would leak information. Often, it needs to be random in a
 cryptographically-secure way. That first parameter is called an **initialization
-vector**. It must be sent along with the ciphertext to ensure it can be
-deciphered.
+vector**. It must be sent along with the ciphertext so it can be deciphered.
+
+Those ciphers only ensure **confidentiality** (the message can only be read by
+keyholders), but they lack:
+- **authentication**: the message was validated by a keyholder,
+- **integrity**: the message was not modified by a non-keyholder.
+
+The lack of those guarantees can allow a non-keyholder to tamper with the
+encrypted content unnoticed. The decrypted plaintext would then contain
+planted or substituted information.
+
+**Authenticated Encryption** (AE) offer authentication and integrity by adding a
+MAC. For instance, **GCM** (Galois Counter mode) converts a block cipher to an
+authenticated stream cipher which encrypts in counter mode and also produces a
+fixed-sized tag (a MAC) for the whole message.
+
+There are three variants of AE: **Encrypt-then-MAC** (EtM), which hashes
+encrypted data, **Encrypt-and-MAC** (E&M), which hashes plaintext data, and
+**MAC-then-Encrypt** (MtE), which encrypts hashed plaintext data.
+
+EtM is considered the most secure. MtE, for instance, has caused vulnerabilities
+such as Lucky13 in the way it interacts with padding.
 
 ## Asymmetrical cryptography
 
@@ -282,9 +302,9 @@ have **forward secrecy**.
 ### Digital signature
 
 **Digital signatures** associated with a message give the following guarantees:
-- **authentication**: the message was validated by a given entity,
-- **non-repudiation**: the message cannot be un-validated by that entity,
-- **integrity**: the message was not modified by a different entity.
+- **authentication**: the message was validated by a keyholder,
+- **non-repudiation**: the message cannot be un-validated by the keyholder,
+- **integrity**: the message was not modified by a non-keyholder.
 
 Unlike a MAC, it does not require a shared secret, just shared public keys.
 
