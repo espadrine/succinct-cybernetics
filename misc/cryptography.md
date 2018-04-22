@@ -244,6 +244,11 @@ encrypted data, **Encrypt-and-MAC** (E&M), which hashes plaintext data, and
 EtM is considered the most secure. MtE, for instance, has caused vulnerabilities
 such as Lucky13 in the way it interacts with padding.
 
+Usually, you can also insert non-encrypted metadata along with the ciphertext,
+which you wish to include for integrity in the AE MAC. That design is called
+**Authenticated Encryption with Associated Data** (AEAD). For instance, GCM mode
+supports that.
+
 ## Asymmetrical cryptography
 
 Cipher that defines three functions `public, private = keys(random)`,
