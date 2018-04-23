@@ -29,13 +29,15 @@ fast.
 A regular NIST competition is performed to select a good hash function: the
 Secure Hash Algorithm (SHA).
 
-SHA-0 and SHA-1 are considered broken; some SHA-2 constructions have dangerous
-properties (vulnerability to *length-extension attacks*) that require the use of
-the HMAC algorithm for message authentication (but SHA-512/256 (ie. SHA-512
-truncated to 256 bits) does not), and Joan Daemen’s SHA-3 is the latest as of
-2018 (and does not have the SHA-2 issues).
+Ron Rivest’s MD5 is broken; SHA-0 and SHA-1 are considered broken; some SHA-2
+constructions have dangerous properties (vulnerability to *length-extension
+attacks*) that require the use of the HMAC algorithm for message authentication
+(but SHA-512/256 (ie. SHA-512 truncated to 256 bits) does not), and Joan
+Daemen’s SHA-3 is the latest as of 2018 (and does not have the SHA-2 issues).
 
-Famous non-SHA cryptographic hash functions include BLAKE2, Kangaroo12.
+Famous non-SHA cryptographic hash functions include BLAKE2 (derived from SHA
+finalist BLAKE, itself derived from djb’s ChaCha20), Kangaroo12 (derived from
+SHA-3).
 
 Famous non-cryptographic hash functions include Zobrist (eg. to detect unique
 states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
@@ -45,7 +47,7 @@ states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
 ### Message Authentication Code
 
 A **Message Authentication Code** (MAC) can assert the following properties if
-you share a secret with a given entity:
+you share a secret key with a given entity:
 - **authentication**: the message was validated by a keyholder,
 - **integrity**: the message was not modified by a non-keyholder.
 
@@ -112,10 +114,11 @@ bits, as a number) every time it is called, such that:
 - the sequence of bits obeys the statistical characteristics we talked about.
 
 Cryptographically-Secure PRNG (CSPRNG) are designed more carefully but are
-typically slower.
+typically slower. They are usually instances of a **pseudorandom function
+family** (PRF).
 
-Examples: arc4random (based on a leaked version of the RC4 cipher), ChaCha20
-(eg. in Linux’ /dev/urandom).
+Examples: arc4random (based on a leaked version of the RC4 cipher), AES-CTR,
+ChaCha20 (eg. in Linux’ /dev/urandom).
 
 Examples of non-cryptographically-secure: LCG, XorShift, Mersenne Twister, PCG
 (in order of quality against predictability).
