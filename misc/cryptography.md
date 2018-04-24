@@ -68,15 +68,15 @@ Another common MAC is *Poly1305*.
 ### Key derivation function
 
 One use of cryptographic hash functions is to store password, but only via a
-metafunction called a **key derivation function** that performs **key
+metafunction called a **key derivation function** (KDF) that performs **key
 stretching** (passing a low-[entropy][] password through the hash function in a
 loop a large number of times) and salting (putting a known random prefix to
 protect against *rainbow attacks*).
 
-Famous key derivation functions include PBKDF2, bcrypt, scrypt and Argon2,
-ordered by date of creation and increased confidence in security. They typically
-have a stretching parameter to increase their complexity so that the same
-algorithm can be used when computers get better at brute-forcing passwords.
+Famous KDFs include PBKDF2, bcrypt, scrypt and Argon2, ordered by date of
+creation and increased confidence in security. They typically have a stretching
+parameter to increase their complexity so that the same algorithm can be used
+when computers get better at brute-forcing passwords.
 
 [entropy]: ./information.md
 
@@ -269,22 +269,35 @@ Cipher that defines three functions `public, private = keys(random)`,
 
 Most ciphers rely on one of two common mathematically difficult problems to
 enforce the one-way constraint:
-- factoring primes (RSA)
-- elliptic curves (ECDSA, ed25519).
+- factoring primes (**RSA**),
+- elliptic curves (**EC**, eg. NIST P-256 (aka secp256r1), or Curve25519). The
+  keys are typically smaller (eg. 256-bit, compare to 4096 bits for RSA).
+
+**RSA** (Rivest, Shamir, Adleman) was the first public-key cryptosystem, and
+shows how to encrypt data in its original formulation. However, it is usually
+used as **RSA-OAEP** (RFC 2437) for use in encryption, detailing the proper use of
+padding by relying on a hash function.
+
+Elliptic curves don’t by themselves have an encryption algorithm, but **ECIES**
+(Elliptic Curve Integrated Encryption Scheme) combines an EC, a *KDF*, a *MAC*,
+and a *symmetric encryption scheme* to encrypt data just with a public key.
 
 ### Key exchange
 
-Encryption gets very computationally expensive for large (> 128 bit) messages.
-Since the goal of asymmetric encryption is to allow secure communication over a
-public channel without needing a shared secret (the issue with symmetric
-ciphers), this is limiting.
+Encryption is much more computationally expensive than symmetric schemes for
+large (> 400 bytes) messages. Since the goal of asymmetric encryption is to
+allow secure communication over a public channel without needing a shared secret
+(the issue with symmetric ciphers), this is limiting.
 
-**Diffie-Hellman** is a protocol that lets two parties A and B obtain a shared
-secret over a public channel. That secret can then be used as the key of a
-symmetric cipher.
+A **key exchange** is a protocol where two entities communicate in public,
+resulting in them generating a secret key that only they know.
+
+**Diffie-Hellman** is a key exchange that lets two parties A and B obtain a
+shared secret over a public channel. That secret can then be used as the key of
+a symmetric cipher.
 
 1. They each generate public and private keys with the same parameters (the
-   modulo portion for RSA, the domain parameters for elliptic curves)..
+   modulo portion for RSA, the domain parameters for elliptic curves (ECDH)).
 2. They agree on a base message `m`.
 3. A sends `encryptPrivate(m, privateA)`, and B sends `encryptPrivate(m,
    privateB)`.
@@ -296,13 +309,8 @@ symmetric cipher.
 Advice for the common values to choose is detailed in
 [RFC 5114](https://tools.ietf.org/html/rfc5114).
 
-Another more expensive solution:
-1. They each generate public and private keys and B sends its public key.
-2. A computes `secret = encryptPrivate(m, privateA)` with a random `m`.
-3. A sends `encryptPublic(secret, publicB)`.
-4. B alone can compute
-   `secret = encryptPrivate(encryptPublic(secret, publicB), privateB)`.
-5. `secret` is now shared exclusively between A and B.
+Daniel J. Bernstein’s **X25519** is a famous ECDH using Curve25519 (picked by
+djb for that use).
 
 Systems which generate a new random secret key for every new session are said to
 have **forward secrecy**.
@@ -319,12 +327,19 @@ Unlike a MAC, it does not require a shared secret, just shared public keys.
 It relies on two functions, `sign()` and `verify()`, and a public/private key
 pair, such that:
 - `verify(message, sign(message, private), public) = true` and all other
-  parameter combinations yield `false`.
+  parameter combinations yield `false` with high probability.
 
-Usually:
+For RSA, this is achieved this way:
 - `sign(message, private) = encryptPrivate(hash(message), private)`
 - `verify(message, signature, public) = encryptPublic(signature, public) ==
   hash(message)`
+
+**ECDSA** (Elliptic Curve Digital Signature Algorithm) achieves that scheme,
+given any EC and a hash.
+
+Daniel J. Bernstein’s **EdDSA** is another digital signature scheme relying on
+Edwards curves (such as Curve25519), and tends to be faster than ECDSA. The
+primary example is ed25519, which is included in OpenSSH.
 
 ## Going further
 
