@@ -334,6 +334,13 @@ For RSA, this is achieved this way:
 - `verify(message, signature, public) = encryptPublic(signature, public) ==
   hash(message)`
 
+In practice, **RSASSA-PKCS1-v1\_5** defines an RSA signature scheme for a given
+hash.
+
+**RSASSA-PSS** defines another RSA signature scheme for a given hash, mask
+generation formula, and a randomly generated salt of a given size. Both of those
+schemes are defined in RFC 3447.
+
 **ECDSA** (Elliptic Curve Digital Signature Algorithm) achieves that scheme,
 given any EC and a hash.
 
