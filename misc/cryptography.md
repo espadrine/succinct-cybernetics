@@ -166,7 +166,9 @@ SSL/TLS and WEP/WPA, until a 2015 flaw was discovered.
 Daniel J. Bernstein (djb) designed *Salsa20* for the eSTREAM competition (a
 follow-up to the NESSIE competition where all stream ciphers submitted were
 broken). Many servers switched from RC4 to a derived cipher, **ChaCha20**, along
-with djb’s Poly1305 MAC, to have authenticated encryption (RFC 7905).
+with djb’s Poly1305 MAC, to have authenticated encryption ([RFC 7905][]).
+
+[RFC 7905]: https://tools.ietf.org/html/rfc7905
 
 ### Block ciphers
 
@@ -275,8 +277,10 @@ enforce the one-way constraint:
 
 **RSA** (Rivest, Shamir, Adleman) was the first public-key cryptosystem, and
 shows how to encrypt data in its original formulation. However, it is usually
-used as **RSA-OAEP** (RFC 2437) for use in encryption, detailing the proper use of
-padding by relying on a hash function.
+used as **RSAES-OAEP** ([RFC 2437][]) for use in encryption, detailing the
+proper use of padding by relying on a hash function.
+
+[RFC 2437]: https://tools.ietf.org/html/rfc2437
 
 Elliptic curves don’t by themselves have an encryption algorithm, but **ECIES**
 (Elliptic Curve Integrated Encryption Scheme) combines an EC, a *KDF*, a *MAC*,
@@ -339,7 +343,9 @@ hash.
 
 **RSASSA-PSS** defines another RSA signature scheme for a given hash, mask
 generation formula, and a randomly generated salt of a given size. Both of those
-schemes are defined in RFC 3447.
+schemes are defined in [RFC 3447][].
+
+[RFC 3447]: https://tools.ietf.org/html/rfc3447
 
 **ECDSA** (Elliptic Curve Digital Signature Algorithm) achieves that scheme,
 given any EC and a hash.
