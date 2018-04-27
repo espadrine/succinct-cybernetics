@@ -49,19 +49,23 @@ The counterpart: transfer speeds are much lower than RAM.
 - HDD: 100 MB/s, 10 ms latency, but it pays that latency every time it needs to move to a completely different location on disk.
 - SSD: 1 GB/s, 30 μs latency.
 
-The data persists until your computer gets wet, or until your laptop hits the ground too hard. Even without those momentary lapses of judgements, drives are probabilistic, not absolute.
+Persistence is not a certainty. First, environmental events like water damage, shock, melting or electromagnetic fields can destroy stored information.
 
-First, full drive failures happen:
-- HDD: [50% failure after 6 years](https://www.backblaze.com/blog/how-long-do-disk-drives-last/).
-  Yearly rolling failure rate: [5%](https://www.backblaze.com/blog/hard-drive-reliability-q3-2015/).
-- SSD: 10 years.
-  Yearly rolling failure rate: [4 to 30%](https://users.ece.cmu.edu/~omutlu/pub/flash-memory-failures-in-the-field-at-facebook_sigmetrics15.pdf).
+Second, drives age probabilistically.
+Manufacturers use two metrics: Mean Time Between Failures (MTBF, expected lifetime) and Annualized Failure Rates (AFR, probability that a drive dies within a year). The two are linked by a [Poisson](./statistics.md) distribution: `AFR = 1-exp(-8760/MTBF)`.
 
-Even worse, bitrot (ie. a random change of a bit from 0 to 1 or vice-versa) happens. HDD are exposed to a huge amount of cosmic radiation than can impact their magnetic material. It happens maybe once a year? In addition to that, SSD are made of 1- or 2-bit floating-gate transistors that have a very predictable wear. Eventually, they return the wrong value.
+- HDD: AFR of [2%][Backblaze AFR]. Note that aging affects AFR (it is about 5% for 1.5 years, then 1.5% for 1.5 years, then 12% [according to Backblaze][Backblaze age analysis].
+- SSD: AFR of [0.7%][Microsoft SSD Failures].
+
+[Backblaze AFR]: https://www.backblaze.com/blog/hard-drive-failure-rates-q1-2017/
+[Backblaze age analysis]: https://www.backblaze.com/blog/how-long-do-disk-drives-last/
+[Microsoft SSD Failures]: https://www.microsoft.com/en-us/research/wp-content/uploads/2016/08/a7-narayanan.pdf
+
+Third, **bitrot** (ie. a random change of a bit from 0 to 1 or vice-versa) happens. HDD are exposed to a huge amount of cosmic radiation than can impact their magnetic material. It happens maybe once a year? In addition to that, SSD are made of 1- or 2-bit floating-gate transistors that have a very predictable wear. Eventually, they return the wrong value.
 
 ### File system
 
-Disk storage is typically organized hierarchically, as a tree of files: leafs contain blobs of bytes, while their ancestors in the tree, directories, associate each child with a name.
+Persistent storage is typically organized hierarchically, as a tree of files: leafs contain blobs of bytes, while their ancestors in the tree, directories, associate each child with a name.
 
 #### Disk Layout
 
