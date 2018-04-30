@@ -98,7 +98,7 @@ are pretty good at exploiting weaknesses in randomness.
 
 A good random source obeys certain *statistical* characteristics to ensure that
 the probability of someone predicting its output is near zero.
-(See for instance the [NIST randomness recommandation][].)
+(See for instance the [NIST randomness recommendation][].)
 
 [NIST randomness recommandation]: https://csrc.nist.gov/projects/random-bit-generation
 
