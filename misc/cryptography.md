@@ -63,7 +63,7 @@ they can be used by relying on the **HMAC** algorithm:
   hash((rehash(key)^innerPad) + message))` where `^` is XOR, the pads are fixed
   and the size of the hash block, and `rehash` depends on the hash size.
 
-Another common MAC is *Poly1305*.
+Another common MAC is djb’s *Poly1305*.
 
 ### Key derivation function
 
@@ -157,7 +157,7 @@ that it is unbreakable (the only such cipher known to date), as for all
 plaintexts, there is a key that yields a given ciphertext. Practical risks in
 managing the key caused it to fall into disuse.
 
-Ron Rivest designed the **RC4** (Rivest Cipher 4) as a proprietary algorithm for
+Ron Rivest designed **RC4** (Rivest Cipher 4) as a proprietary algorithm for
 the RSA Security company. Following an anonymous online description, it was
 reverse-engineered. To avoid trademark conflicts, many systems adopted it as
 *ARC4*, and a derived CSPRNG was called *arc4random*. It was a common cipher in
@@ -185,9 +185,10 @@ each input bit to output bits, producing statistically more random output.)
 The number of times the network is repeated is called the number of **rounds**.
 Typical cryptanalysis first tries to break a cipher with a lower number of
 rounds. If they find a better algorithm than brute-force on all rounds, the
-cipher is considered *broken*, but the algorithm typically requires impractical
-amounts of time and memory. If it achieves a scale close to human lives and
-memory close to that of a country, it is considered *practically broken*.
+cipher is considered *theoretically broken*, but the algorithm typically
+requires impractical amounts of time and memory. If it achieves a scale close to
+human lives and memory close to that of a country, it is considered *practically
+broken*.
 
 The US government’s NBS (ancestor to NIST) requested proposals for a cipher. IBM
 proposed **DES** (Data Encryption Standard), a 64-bit block cipher (based on a
