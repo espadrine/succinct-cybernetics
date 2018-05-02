@@ -42,7 +42,18 @@ SHA-3).
 Famous non-cryptographic hash functions include Zobrist (eg. to detect unique
 states in a game), FNV, CityHash, MurmurHash, SipHash (for hash tables).
 
-**Universal hash functions** TODO
+**Universal hash functions** are a family of hash functions where a key
+determines which function of the family is picked (usually, a random number
+picked when the hash table is created in memory). They only target
+**collision-resistance** against an adversary *that doesn’t know the key*.
+*SipHash* (by JP Aumasson and djb) is secure under those assumptions, and fast
+enough to be used to avoid malicious collisions in hash tables causing
+performance degradation and unavailability.
+
+A MAC (see below) can be used as a universal hash function by using a random
+key.
+
+**Rolling hash functions** TODO
 
 ### Message Authentication Code
 
@@ -64,6 +75,8 @@ they can be used by relying on the **HMAC** algorithm:
   and the size of the hash block, and `rehash` depends on the hash size.
 
 Another common MAC is djb’s *Poly1305*.
+
+HOTP, TOTP: TODO
 
 ### Key derivation function
 
@@ -354,6 +367,10 @@ given any EC and a hash.
 Daniel J. Bernstein’s **EdDSA** is another digital signature scheme relying on
 Edwards curves (such as Curve25519), and tends to be faster than ECDSA. The
 primary example is ed25519, which is included in OpenSSH.
+
+## Quantum Cryptography
+
+Shor’s algorithm TODO
 
 ## Going further
 
