@@ -370,7 +370,29 @@ primary example is ed25519, which is included in OpenSSH.
 
 ## Quantum Cryptography
 
-Shor’s algorithm TODO
+**Shor’s algorithm** solves integer factorization in logarithmic time on a
+quantum computer, which breaks the complexity assumption of RSA (and a variant
+would also break elliptic curve cryptography). The part of the algorithm running
+on a classical computer is randomized: pick a number F < N, discard it in some
+edge-cases. The quantum part finds the period of f(x) = F^x mod(N) by entangling
+photons in a circuit such that interference will cause the observation of the
+photons to collapse to one of several states which follow an equation of the
+period. Multiple equations allow to solve the period. Then the classical
+computer checks that it can use F and the period to find factors of N.
+
+However, quantum computers struggle with:
+- **Coherence time** (how much time the qubits stay uncorrupted). Keeping an
+  algorithm running > 10 s is a challenge.
+- Number of qubits. The largest quantum computer has just 2000 qubits. Shor’s
+  algorithm needs twice the size of the RSA key, eg. 4096 for 2048-bit RSA, and
+  likely ten times that to correct errors.
+
+The largest number factorized by a quantum computer is 19-bit. There are no case
+yet of a quantum computation going faster than the equivalent classical
+computation (aka. **quantum supremacy**).
+
+It should eventually happen, which is why other techniques for asymmetric
+cryptography are researched, such as **lattice cryptography**.
 
 ## Going further
 
