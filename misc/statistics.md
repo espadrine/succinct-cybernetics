@@ -2,26 +2,30 @@
 
 ## Probabilities
 
+Kolmogorov axioms:
+
 - Ω: set of elementary events (exclusive outcomes)
 - F: set of events; σ-algebra (closed set of all subsets) of Ω
 - prob: function from F to [0,1]
 - prob(Ω) = 1
+- prob(∪Ai) = Σ prob(Ai) if Ai disjoint (= exclusive)  *(partition of a disk)*
+
 - prob(∅) = 0
-- prob(Ω\A) = 1 - prob(A)
+- prob(Ω-A) = 1 - prob(A)
+- prob(A) = |A| ÷ |Ω| if Ω countable and ∀e∈Ω, prob({e}) = 1÷|Ω|
 - prob(A∪B) = prob(A) + prob(B) - prob(A∩B)  *(think overlapping disks)*
-- A, B disjoint ⇔ prob(A∩B) = 0  *(non-overlapping disks)*
-- prob(∪Ai) = Σ{r=1…n} (-1)^(r+1) Σ{i1≤ir} prob(Ai1∩…∩Air)
 - prob(∪Ai) ≤ Σ prob(Ai)
-- Ai pairwise disjoint ⇒ prob(∪Ai) = Σ prob(Ai)  *(partition of a disk)*
-- prob(∩Ai) = Π prob(Ai)
-- prob(∩Ai) = Π{i=2…} prob(Ai|A1∩…∩A{i-1}) prob(A1)
-- A1⊂A2⊂… ⇒ prob(An) → prob(∪Ai)
-- A1⊃A2⊃… ⇒ prob(An) → prob(∩Ai)
-- prob(A|B) = prob(A∩B) / prob(B)
+- prob(∪Ai) = Σr∈{1…n} (-1)<sup>r+1</sup> Σ{i1≤ir} prob(Ai1∩…∩Air)
+- prob(∩Ai) = 0 ⇔ Ai disjoint  *(non-overlapping disks)*
+- A1⊂A2⊂… ⇒ prob(An) → prob(∪Ai), prob(Ai) < prob(Ai+1)
+- A1⊃A2⊃… ⇒ prob(An) → prob(∩Ai), prob(Ai) > prob(Ai+1)
+- prob(A|B) ≝ prob(A∩B) ÷ prob(B)  *(think of |B as assuming Ω = B)*
 - A, B independent ⇔ prob(A|B) = prob(A)
+- prob(∩Ai) = Π prob(Ai) if Ai independent
+- prob(∩Ai) = Π{i=2…} prob(Ai|A1∩…∩A{i-1}) prob(A1)
 - A∈∪Bi ⇒ prob(A) = Σ prob(A∩Bi)
-- prob(A|B) = prob(B|A) prob(A) / prob(B)  *(Bayes' theorem)*
-- Ai partition of Ω ⇒ prob(Ai|B) = prob(B|Ai) prob(Ai) / (Σj prob(B|Aj) prob(Aj))
+- prob(A|B) = prob(B|A) prob(A) ÷ prob(B)  *(Bayes' theorem)*
+- Ai partition of Ω ⇒ prob(Ai|B) = prob(B|Ai) prob(Ai) ÷ (Σj prob(B|Aj) prob(Aj))
 
 ## Distributions
 
